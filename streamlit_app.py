@@ -7,6 +7,11 @@ import pickle
 with open('diabetes_model.pkl', 'rb') as file:
     model = pickle.load(file)
 
+from pathlib import Path
+
+st.write("Model location:", Path("diabetes_model.pkl").resolve())
+st.write("Model type:", type(model).__name__)
+
 st.title("Diabetes Prediction Web App")
 
 st.write("Enter patient details below.")
@@ -21,6 +26,9 @@ dpf = st.number_input("Diabetes Pedigree Function", min_value=0.0)
 age = st.number_input("Age", min_value=1)
 
 if st.button("Predict"):
+
+    st.write("Input sent to model:", features)
+    st.write("Raw prediction:", prediction)
 
     features = np.array([[
         preg, glucose, bp, skin,
